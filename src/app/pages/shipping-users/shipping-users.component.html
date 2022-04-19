@@ -1,0 +1,9 @@
+<nb-card [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching user details'">
+    <nb-card-header>
+        Shipping Companies
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="tableSettings" [source]="tableSource" (userRowSelect)="selectRow($event)" (edit)="selectRow($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>

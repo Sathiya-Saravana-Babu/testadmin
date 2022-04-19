@@ -1,0 +1,12 @@
+<nb-card [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching deta..'">
+  <nb-card-header>
+    Manage Contents - {{pageName}}
+
+    <button class="btn btn-primary float-right" (click)="createRow()" *ngIf="pageName!='Contacts' && pageName !='Social Link' && pageName!='Banner'">{{pageName=='Faq Item'? 'Add FAQ item' : 'Add Images'}}</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table (userRowSelect)="selectRow($event)" (edit)="editRow($event)" (delete)="deleteRow($event)" [settings]="tableSettings" [source]="tableSource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

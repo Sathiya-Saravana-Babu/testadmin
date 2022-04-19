@@ -1,0 +1,142 @@
+export default class BookingsModel {
+  public web_id: number;
+  public bookings_email: string;
+  public bookings_phone: string;
+  public bookings_no: string;
+  public bookings_vehicle_id: number;
+  public bookings_starting_point: string;
+  public bookings_ending_point: string;
+  public bookings_stop_points: string;
+  public bookings_travel_date: any;
+  public bookings_travel_return_date: any;
+  public bookings_adult_count: number;
+  public bookings_infant_count: number;
+  public bookings_parcel_type: string;
+  public bookings_parcel_count: string;
+  public bookings_routes_id: number;
+  public bookings_content: string;
+  public bookings_invoice_link: string;
+  public bookings_status: string;
+  public bookings_user_id: string;
+  public bookings_username: string;
+  public bookings_payment_id: string;
+  public bookings_time: any;
+  public vehicles_vehicle_type: string;
+  public vehicles_vehicle_name: string;
+  public vehicles_vehicle_logo: string;
+  public routes_vehicle_id: number;
+  public routes_vehicle_id_round: number;
+  public bookings_routes_id_round: number;
+  public routes_starting_point: string;
+  public routes_ending_point: string;
+  public routes_stop_points: string;
+  public routes_distance: string;
+  public routes_departure_time: string;
+  public routes_arriving_time: string;
+  public routes_adult_present: string;
+  public routes_infant_present: string;
+  public routes_adult_price: number;
+  public routes_adult_round_price: number;
+  public routes_infant_price: number;
+  public routes_infant_round_price: number;
+  public routes_departure_status: string;
+  public routes_mon_availability: string;
+  public routes_tue_availability: string;
+  public routes_wed_availability: string;
+  public routes_thu_availability: string;
+  public routes_fri_availability: string;
+  public routes_sat_availability: string;
+  public routes_sun_availability: string;
+  public routes_with_envelope: number;
+  public routes_with_small_box: number;
+  public routes_with_medium_box: number;
+  public routes_with_large_box: number;
+  public routes_with_xlarge_box: number;
+  public routes_travel_type: string;
+  public webhook_type: string;
+  public webhook_response: string;
+  public webhook_id: string;
+  public bookings_passengers: string;
+  public class_name: string;
+  public class_vehicle_type: string;
+  public bookings_amount: any;
+  public bookings_amount_commission: any;
+  public vehicles_vehicle_name_round: string;
+  public vehicles_vehicle_logo_round: string;
+  public routes_departure_time_round: string;
+  public routes_arriving_time_round: string;
+  public class_name_round: string;
+
+  constructor(bookings: any = {}) {
+
+    this.web_id = bookings.web_id || "";
+    this.bookings_email = bookings.bookings_email || "";
+    this.bookings_phone = bookings.bookings_phone || "";
+    this.bookings_no = bookings.bookings_no || "";
+    this.bookings_vehicle_id = bookings.bookings_vehicle_id || "";
+    this.bookings_starting_point = bookings.bookings_starting_point || "";
+    this.bookings_ending_point = bookings.bookings_ending_point || "";
+    this.bookings_stop_points = bookings.bookings_stop_points || "";
+    this.bookings_travel_date = bookings.bookings_travel_date || "";
+    this.bookings_travel_return_date = bookings.bookings_travel_return_date || "";
+    this.bookings_adult_count = bookings.bookings_adult_count || "";
+    this.bookings_infant_count = bookings.bookings_infant_count || "";
+    this.bookings_parcel_type = bookings.bookings_parcel_type || "";
+    this.bookings_parcel_count = bookings.bookings_parcel_count || "";
+    this.bookings_routes_id = bookings.bookings_routes_id || "";
+    this.bookings_content = bookings.bookings_content || "";
+    this.bookings_invoice_link = bookings.bookings_invoice_link || "";
+    this.bookings_status = bookings.bookings_status || "";
+    this.bookings_user_id = bookings.bookings_user_id || "";
+    this.bookings_username = bookings.bookings_username || "";
+    this.bookings_payment_id = bookings.bookings_payment_id || "";
+    this.bookings_time = bookings.bookings_time || "";
+    this.vehicles_vehicle_type = bookings.vehicles_vehicle_type || "";
+    this.vehicles_vehicle_name = bookings.vehicles_vehicle_name || "";
+    this.vehicles_vehicle_logo = bookings.vehicles_vehicle_logo || "";
+    this.routes_vehicle_id = bookings.routes_vehicle_id || "";
+    this.routes_starting_point = bookings.routes_starting_point || "";
+    this.routes_ending_point = bookings.routes_ending_point || "";
+    this.routes_stop_points = bookings.routes_stop_points || "";
+    this.routes_distance = bookings.routes_distance || "";
+    this.routes_departure_time = bookings.routes_departure_time || "";
+    this.routes_arriving_time = bookings.routes_arriving_time || "";
+    this.routes_adult_present = bookings.routes_adult_present || "";
+    this.routes_infant_present = bookings.routes_infant_present || "";
+    this.routes_adult_price = bookings.routes_adult_price || "";
+    this.routes_adult_round_price = bookings.routes_adult_round_price || "";
+    this.routes_infant_price = bookings.routes_infant_price || "";
+    this.routes_infant_round_price = bookings.routes_infant_round_price || "";
+    this.routes_departure_status = bookings.routes_departure_status || "";
+    this.routes_mon_availability = bookings.routes_mon_availability || "";
+    this.routes_tue_availability = bookings.routes_tue_availability || "";
+    this.routes_wed_availability = bookings.routes_wed_availability || "";
+    this.routes_thu_availability = bookings.routes_thu_availability || "";
+    this.routes_fri_availability = bookings.routes_fri_availability || "";
+    this.routes_sat_availability = bookings.routes_sat_availability || "";
+    this.routes_sun_availability = bookings.routes_sun_availability || "";
+    this.routes_with_envelope = bookings.routes_with_envelope || "";
+    this.routes_with_small_box = bookings.routes_with_small_box || "";
+    this.routes_with_medium_box = bookings.routes_with_medium_box || "";
+    this.routes_with_large_box = bookings.routes_with_large_box || "";
+    this.routes_with_xlarge_box = bookings.routes_with_xlarge_box || "";
+    this.routes_travel_type = bookings.routes_travel_type || "";
+    this.webhook_type = bookings.webhook_type || "";
+    this.webhook_response = bookings.webhook_response || "";
+    this.webhook_id = bookings.webhook_id || "";
+    this.bookings_passengers = bookings.bookings_passengers || "";
+    this.class_name = bookings.class_name || "";
+    this.class_vehicle_type = bookings.class_vehicle_type || "";
+    this.bookings_amount = bookings.bookings_amount || {};
+    this.bookings_amount_commission = bookings.bookings_amount_commission || '';
+    this.vehicles_vehicle_name_round = bookings.vehicles_vehicle_name_round || ''
+    this.vehicles_vehicle_logo_round = bookings.vehicles_vehicle_logo_round || ''
+    this.routes_departure_time_round = bookings.routes_departure_time_round || ''
+    this.routes_arriving_time_round = bookings.routes_arriving_time_round || ''
+    this.class_name_round = bookings.class_name_round || ''
+    this.routes_vehicle_id_round = bookings.routes_vehicle_id_round || '';
+    this.bookings_routes_id_round = bookings.bookings_routes_id_round || '';
+  }
+
+
+}

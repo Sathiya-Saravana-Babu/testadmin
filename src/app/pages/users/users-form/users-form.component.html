@@ -1,0 +1,300 @@
+<nb-card accent="info" [nbSpinner]="loading">
+  <nb-card-header> Profile</nb-card-header>
+  <nb-card-body  [nbSpinner]="loading" nbSpinnerStatus="danger" >
+
+    <nb-list *ngIf="dialogAction=='view'" class="dialog-list">
+
+      <nb-list-item *ngIf="dialogData.user_name" class="row">
+        <div class="title col-4">
+          <h6>Name</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogData.user_name}} {{dialogData.user_namelast}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_phone_no">
+        <div class="title col-4">
+          <h6>Phone No</h6>
+        </div>
+        <div class="content col-8">
+          <a class="text-muted" href="tel:{{dialogData.user_phone_no}}">{{dialogData.user_phone_no}}</a>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_register_type">
+        <div class="title col-4">
+          <h6>Register via</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogData.user_register_type}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_email">
+        <div class="title col-4">
+          <h6>Email</h6>
+        </div>
+        <div class="content col-8">
+          <a class="text-muted" href="mailto:{{dialogData.user_email}}">{{dialogData.user_email}}</a>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_gender">
+        <div class="title col-4">
+          <h6>Gender</h6>
+        </div>
+        <div class="content col-8">
+         {{dialogData.user_gender}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_dob">
+        <div class="title col-4">
+          <h6>Date of birth</h6>
+        </div>
+        <div class="content col-8">
+         {{dialogData.user_dob | date}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_id_auth">
+        <div class="title col-4">
+          <h6>Passport Number</h6>
+        </div>
+        <div class="content col-8">
+         {{dialogData.user_id_auth}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.user_address_1">
+        <div class="title col-4">
+          <h6>Address </h6>
+        </div>
+        <div class="content col-8">
+          <p *ngIf="dialogData.user_address_1">{{dialogData.user_address_1}} <br></p>
+          <p *ngIf="dialogData.user_address_2">{{dialogData.user_address_2}} <br></p>
+          <p *ngIf="dialogData.user_city">{{dialogData.user_city}} <br></p>
+          <p *ngIf="dialogData.user_zipcode">{{dialogData.user_zipcode}} <br></p>
+          <p *ngIf="dialogData.user_state">{{dialogData.user_state}} <br></p>
+          <p *ngIf="dialogData.user_country">{{countryNameCalculator(dialogData.user_country)}} <br></p>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" >
+        <div class="title col-4">
+          <h6>Email subscription</h6>
+        </div>
+        <div class="content col-8">
+          <nb-toggle [checked]="dialogData.user_email_subscription==1" disabled></nb-toggle>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" >
+        <div class="title col-4">
+          <h6>Status</h6>
+        </div>
+        <div class="content col-8">
+
+          <nb-toggle [checked]="dialogData.user_active_status==1" disabled></nb-toggle>
+        </div>
+      </nb-list-item>
+
+    </nb-list>
+
+
+
+    <nb-list class="dialog-list" *ngIf="dialogAction=='edit' || dialogAction=='add'">
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>First Name</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_name" nbInput fullWidth status="basic" placeholder="First Name">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Last Name</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_namelast" nbInput fullWidth status="basic" placeholder="Last Name">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Phone No</h6>
+        </div>
+        <div class="content col-8">
+          <input *ngIf="dialogAction=='edit'" type="text" [(ngModel)]="dialogData.user_phone_no" nbInput fullWidth status="basic"
+            placeholder="+1 987654321">
+
+          <div class="row" *ngIf="dialogAction=='add'">
+            <div class="col-5">
+              <nb-select fullWidth [(ngModel)]="dialogData.selectedCountry" placeholder="Country code">
+                <nb-option [value]="''">Choose country</nb-option>
+                <nb-option [value]="c.phonecode" *ngFor="let c of tempCountries">{{c.name + ' '+c.phonecode}}</nb-option>
+              </nb-select>
+            </div>
+            <div class="col-7">
+              <input type="text" [(ngModel)]="dialogData.user_phone_no" nbInput fullWidth status="basic"
+              placeholder="987654321">
+            </div>
+          </div>
+
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Email</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_email" nbInput fullWidth status="basic" placeholder="Email">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Gender</h6>
+        </div>
+        <div class="content col-8">
+          <!-- <input type="text" [(ngModel)]="dialogData.user_email" nbInput fullWidth status="basic" placeholder="Email"> -->
+          <nb-radio-group [(ngModel)]="dialogData.user_gender">
+            <nb-radio value="male">Male</nb-radio>
+            <nb-radio value="female">Female</nb-radio>
+          </nb-radio-group>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogAction=='add'">
+        <div class="title col-4">
+          <h6>Password</h6>
+        </div>
+        <div class="content col-8">
+          <input type="password" [(ngModel)]="dialogData.user_password" nbInput fullWidth status="basic"
+            placeholder="Password">
+        </div>
+      </nb-list-item>
+
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Register via</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_register_type" disabled nbInput fullWidth status="basic"
+            placeholder="Register via">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Date of birth</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [value]="dialogData.user_dob | date" disabled *ngIf="dialogAction=='edit'" nbInput fullWidth status="basic" placeholder="Date of birth">
+          <!-- <input type="text" [value]="dialogData.user_dob" *ngIf="dialogAction=='add'" nbInput fullWidth status="basic" placeholder="Date of birth"> -->
+          <input *ngIf="dialogAction=='add'" [(ngModel)]="dialogData.user_dob" nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
+          <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Passport Numbber</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_id_auth" *ngIf="dialogData.action=='edit'" nbInput fullWidth status="basic" disabled placeholder="Passport number">
+          <input type="text" [(ngModel)]="dialogData.user_id_auth" *ngIf="dialogData.action=='add'" nbInput fullWidth status="basic" placeholder="Passport number">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Address line 1</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_address_1" nbInput fullWidth status="basic" placeholder="Address line 1">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Address line 2</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_address_2" nbInput fullWidth status="basic" placeholder="Address line 2">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>City</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_city" nbInput fullWidth status="basic" placeholder="City">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Zipcode</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_zipcode" nbInput fullWidth status="basic" placeholder="Zipcode">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>State</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.user_state" nbInput fullWidth status="basic" placeholder="State">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Country of residence</h6>
+        </div>
+        <div class="content col-8">
+        <nb-select placeholder="Choose Country" name="countryOfResidence" class="filtersearch" [(ngModel)]="dialogData.user_country">
+          <nb-option [value]="c.id" *ngFor="let c of tempCountries">{{c.name}}</nb-option>
+        </nb-select>
+
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Email subscription</h6>
+        </div>
+        <div class="content col-8">
+          <nb-toggle [(checked)]="dialogData.user_email_subscription" [(ngModel)]="dialogData.user_email_subscription"></nb-toggle>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogAction!='add'">
+        <div class="title col-4">
+          <h6>Status</h6>
+        </div>
+        <div class="content col-8">
+          <nb-toggle [(checked)]="dialogData.user_active_status" [(ngModel)]="dialogData.user_active_status"></nb-toggle>
+        </div>
+      </nb-list-item>
+    </nb-list>
+
+  </nb-card-body>
+
+  <nb-card-footer *ngIf="dialogAction!='view'">
+    <div class="mt-3">
+      <button (click)="closeWindow()" class="btn btn-danger" status="danger" [disabled]="loading">Cancel</button>
+      <button class="btn btn-primary ml-3" (click)="submitFormResults()" status="primary" [disabled]="loading">{{dialogAction=='edit'?'Update': 'Add'}}</button>
+    </div>
+  </nb-card-footer>
+</nb-card>

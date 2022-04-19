@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+    Manage Companies
+  </nb-card-header>
+
+  <nb-card-body  [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching company details'">
+    <ng2-smart-table (userRowSelect)="selectRow($event)" (custom)="onCustomAction($event)" (create)="createRow()" (edit)="editRow($event)" (delete)="deleteRow($event)" [settings]="tableSettings" [source]="tableSource">
+    </ng2-smart-table>
+
+  </nb-card-body>
+</nb-card>

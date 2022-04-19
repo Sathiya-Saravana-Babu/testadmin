@@ -1,0 +1,248 @@
+<!-- <div class="row">
+  <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards"></div>
+</div> -->
+
+<div class="row">
+  <div class="col-xxxl-12 col-xxl-12 col-lg-12 col-md-12">
+    <h3>Welcome to admin panel</h3>
+  </div>
+</div>
+
+<div class="row mt-2" [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching Data'">
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-8">
+            Total Number of Tickets booked
+          </div>
+          <div class="col-4">
+           <button class="btn btn-info rounded-pill">
+            {{ticketsData.noOfTickets}} tickets
+           </button>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-bus mx-2 text-primary"></i> Total Number of Bus Tickets Booked
+            </div>
+            <div class="col-4">
+              <button class="btn btn-primary">
+                {{ticketsData.noOfTicketsBus}}
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-train mx-2 text-success" ></i> Total Number of Train Tickets Booked
+            </div>
+            <div class="col-4">
+              <button class="btn btn-success">
+                {{ticketsData.noOfTicketsTrain}}
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-plane mx-2 text-warning"></i> Total Number of Airline Tickets Booked
+            </div>
+            <div class="col-4">
+             <button class="btn btn-warning">
+              {{ticketsData.noOfTicketsFlight}}
+             </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <!-- <nb-list-item> asdf </nb-list-item> -->
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-6">
+
+    <nb-card size="medium">
+      <nb-card-header> Tickets booked per service </nb-card-header>
+      <chart type="horizontalBar" [data]="ticketsDataChart" [options]="optionsBar"></chart>
+    </nb-card>
+  </div>
+
+</div>
+
+
+<div class="row mt-4" [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching Data'">
+  <div class="col-12">
+    <nb-card size="medium">
+      <nb-card-header> Last three months performance</nb-card-header>
+      <chart type="line" [data]="lastThreeMonthsDataChart" [options]="optionsBar"></chart>
+    </nb-card>
+  </div>
+</div>
+
+
+<div class="row mt-4" [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching Data'">
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-8">
+            Total Commission
+          </div>
+          <div class="col-4">
+            <button class="btn btn-info rounded-pill">
+              {{currencyConverter(commissionsData.totalCommission)}} Fcfa
+            </button>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-bus mx-2 text-primary"></i> Total Commission Bus
+            </div>
+            <div class="col-4">
+              <button class="btn btn-primary">
+                {{currencyConverter(commissionsData.totalCommissionBus)}} Fcfa
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-train mx-2 text-success" ></i> Total Commission Train
+            </div>
+            <div class="col-4">
+              <button class="btn btn-success">
+                {{currencyConverter(commissionsData.totalCommissionTrain)}} Fcfa
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-plane mx-2 text-warning"></i> Total Commission Flight
+            </div>
+            <div class="col-4">
+              <button class="btn btn-warning">
+                {{currencyConverter(commissionsData.totalCommissionFlight)}} Fcfa
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <!-- <nb-list-item> asdf </nb-list-item> -->
+      </nb-list>
+    </nb-card>
+  </div>
+
+
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>Commission per service </nb-card-header>
+      <chart class="echart" type="horizontalBar" [data]="commissionsDataChart" [options]="optionsBar"></chart>
+    </nb-card>
+  </div>
+</div>
+
+
+<div class="row mt-4" [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching Data'">
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-8">
+            Total Sales
+          </div>
+          <div class="col-4">
+            <button class="btn btn-info rounded-pill">
+              {{currencyConverter(salesData.totalSales)}} Fcfa
+            </button>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-bus mx-2 text-primary"></i> Total Sales Bus
+            </div>
+            <div class="col-4">
+              <button class="btn btn-primary">
+                {{currencyConverter(salesData.totalSalesBus)}} Fcfa
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-train mx-2 text-success"></i> Total Sales Train
+            </div>
+            <div class="col-4">
+              <button class="btn btn-success">
+                {{currencyConverter(salesData.totalSalesTrain)}} Fcfa
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+        <nb-list-item>
+          <div class="row">
+            <div class="col-8">
+              <i class="fa fa-plane mx-2 text-warning"></i> Total Sales Flight
+            </div>
+            <div class="col-4">
+              <button class="btn btn-warning">
+                {{currencyConverter(salesData.totalSalesFlight)}} Fcfa
+              </button>
+            </div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>Sales per service </nb-card-header>
+      <chart type="horizontalBar" [data]="salesDataChart" [options]="optionsBar"></chart>
+    </nb-card>
+  </div>
+</div>
+
+
+<div class="row mt-4" [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching Data'">
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header> Top payment methods</nb-card-header>
+      <chart type="pie" [data]="paymentmethodsDataChart" [options]="optionsPie"></chart>
+    </nb-card>
+  </div>
+
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header> No of tickets booked per channel</nb-card-header>
+      <chart type="pie" [data]="channelsDataChart" [options]="optionsPie"></chart>
+    </nb-card>
+  </div>
+
+</div>
+
+<div class="row mt-4" [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching Data'">
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>Number of tickets sold per price</nb-card-header>
+      <chart type="pie" [data]="ticketsSoldPerPriceDataChart" [options]="optionsPie"></chart>
+    </nb-card>
+  </div>
+
+
+</div>

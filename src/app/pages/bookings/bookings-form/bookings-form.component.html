@@ -1,0 +1,218 @@
+<nb-card accent="info">
+  <nb-card-header>{{dialogData.bookings_starting_point}} to {{dialogData.bookings_ending_point}}
+    ({{dialogData.routes_arriving_time_round!=null? 'Round Trip': 'Single Trip'}})</nb-card-header>
+  <nb-card-body>
+
+    <nb-list class="dialog-list">
+
+
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Passengers</h6>
+        </div>
+        <div class="content col-8">
+           ({{(dialogData.bookings_adult_count>0?dialogData.bookings_adult_count==1?'1 Adult, ':dialogData.bookings_adult_count+' Adults, ':'')+(dialogData.bookings_infant_count>0?dialogData.bookings_infant_count==1?'1 Kid': dialogData.bookings_infant_count+' kids': '')}})
+        </div>
+      </nb-list-item>
+
+
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Name</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogData.bookings_username}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Phone</h6>
+        </div>
+        <div class="content col-8">
+          <a class="color-unset" href="tel:{{dialogData.bookings_phone}}">{{dialogData.bookings_phone}}</a>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item *ngIf="dialogData.bookings_email">
+        <div class="title col-4">
+          <h6>Email</h6>
+        </div>
+        <div class="content col-8">
+          <a class="color-unset" href="mailto:{{dialogData.bookings_email}}">
+            {{dialogData.bookings_email}}
+          </a>
+        </div>
+      </nb-list-item>
+
+        <nb-list-item class="row">
+
+          <h2 class="heading-trip">Outgoing trip</h2>
+
+          <div class="title col-4">
+            <h6>Travelling Date</h6>
+          </div>
+          <div class="content col-8">
+            {{dialogData.bookings_travel_date}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item class="row">
+          <div class="title col-4">
+            <h6>Company Name</h6>
+          </div>
+          <div class="content col-8">
+            {{dialogData.vehicles_vehicle_name}}
+            <img class="pl-3 max-height-100" [alt]="dialogData.vehicles_vehicle_name"
+              [src]="base_url+'uploads/companies/'+dialogData.vehicles_vehicle_logo">
+          </div>
+        </nb-list-item>
+
+        <nb-list-item class="row">
+          <div class="title col-4">
+            <h6>Class</h6>
+          </div>
+          <div class="content col-8">
+            {{dialogData.class_name}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item class="row">
+          <div class="title col-4">
+            <h6>Departure Time</h6>
+          </div>
+          <div class="content col-8">
+            {{AMPMConverter(dialogData.routes_departure_time, 'noneed')}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item class="row">
+          <div class="title col-4">
+            <h6>Arrival Time</h6>
+          </div>
+          <div class="content col-8">
+            {{AMPMConverter(dialogData.routes_arriving_time, 'noneed')}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item *ngIf="round_trip" class="row">
+          <h2 class="heading-trip">Return trip</h2>
+          <div class="title col-4">
+            <h6>Travelling Date</h6>
+          </div>
+          <div class="content col-8">
+            {{dialogData.bookings_travel_return_date}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item *ngIf="round_trip" class="row">
+          <div class="title col-4">
+            <h6>Company Name</h6>
+          </div>
+          <div class="content col-8">
+            {{dialogData.vehicles_vehicle_name_round}}
+            <img class="pl-3 max-height-100" [alt]="dialogData.vehicles_vehicle_name_round"
+              [src]="base_url+'uploads/companies/'+dialogData.vehicles_vehicle_logo_round">
+          </div>
+        </nb-list-item>
+
+        <nb-list-item *ngIf="round_trip" class="row">
+          <div class="title col-4">
+            <h6>Class</h6>
+          </div>
+          <div class="content col-8">
+            {{dialogData.class_name_round}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item *ngIf="round_trip" class="row">
+          <div class="title col-4">
+            <h6>Departure Time</h6>
+          </div>
+          <div class="content col-8">
+            {{AMPMConverter(dialogData.routes_departure_time_round, 'noneed')}}
+          </div>
+        </nb-list-item>
+
+        <nb-list-item *ngIf="round_trip" class="row">
+          <div class="title col-4">
+            <h6>Arrival Time</h6>
+          </div>
+          <div class="content col-8">
+            {{AMPMConverter(dialogData.routes_arriving_time_round, 'noneed')}}
+          </div>
+        </nb-list-item>
+
+
+
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Ticket</h6>
+        </div>
+        <div class="content col-8">
+
+          <a [href]="base_url+'uploads/tickets/EasyTravel_'+dialogData.bookings_invoice_link" target="_blank">
+            <i class="fa fa-file-pdf pdf-icon"> </i>
+          </a>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.bookings_amount">
+        <div class="title col-4">
+          <h6>Ticket Amount</h6>
+        </div>
+        <div class="content col-8">
+          <div class="row my-1">
+            <div class="col-7">Tickets ({{passengerConverter()}})</div>
+            <div class="col-5">{{currencyConverter(dialogData.bookings_amount)}} Fcfa</div>
+          </div>
+          <div class="row my-1">
+            <div class="col-7">
+              Commission Amount
+            </div>
+            <div class="col-5">
+              {{currencyConverter(dialogData.bookings_amount_commission)}} Fcfa
+            </div>
+          </div>
+          <div class="row my-1">
+            <div class="col-7">
+              Total
+            </div>
+            <div class="col-5">
+              {{currencyConverter((+dialogData.bookings_amount)+(+dialogData.bookings_amount_commission))}} Fcfa
+            </div>
+          </div>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item *ngIf="false">
+        <div class="title col-4">
+          <h6>Payment Response</h6>
+        </div>
+        <div class="content col-8">
+          <code>
+            <pre>
+              {{seperateStringintoJson(dialogData.webhook_response) | json}}
+            </pre>
+          </code>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Booked time</h6>
+        </div>
+        <div class="content col-8">
+          {{timeStamptoDate(dialogData.bookings_time) | date: 'medium'}}
+        </div>
+      </nb-list-item>
+
+
+    </nb-list>
+
+
+  </nb-card-body>
+</nb-card>

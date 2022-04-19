@@ -1,0 +1,76 @@
+<nb-card accent="info">
+  <nb-card-header> Payment - {{dialogData.bookings_username}}</nb-card-header>
+  <nb-card-body>
+
+    <nb-list class="dialog-list">
+
+
+      <nb-list-item class="row" *ngIf="dialogDataPaymentType!='Stripe'">
+        <div class="title col-10">
+          <h6>MTN Payment service is not available for now.</h6>
+        </div>
+      </nb-list-item>
+
+
+      <nb-list-item class="row" *ngIf="dialogDataPaymentType">
+        <div class="title col-4">
+          <h6>Payment Type</h6>
+        </div>
+        <div class="content col-8">
+          {{this.dialogDataPaymentType}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogDataPayment.pay_amount">
+        <div class="title col-4">
+          <h6>Amount</h6>
+        </div>
+        <div class="content col-8">
+          {{currencyConverter(dialogDataPayment.pay_amount)}} Fcfa
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogDataPayment.pay_transaction">
+        <div class="title col-4">
+          <h6>Payment ID</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogDataPayment.pay_transaction}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogDataPayment.pay_receipt">
+        <div class="title col-4">
+          <h6>Receipt</h6>
+        </div>
+        <div class="content col-8">
+          <a target="_blank" class="text-muted" [href]="dialogDataPayment.pay_receipt">Receipt</a>
+
+          <!-- <iframe [src]="sanitize.bypassSecurityTrustUrl(dialogDataPayment.pay_receipt)" frameborder="0"></iframe> -->
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogDataPayment.pay_status">
+        <div class="title col-4">
+          <h6>Payment Status</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogDataPayment.pay_status}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogDataPayment.pay_time">
+        <div class="title col-4">
+          <h6>Payment time</h6>
+        </div>
+        <div class="content col-8">
+          {{timeStamptoDate(dialogDataPayment.pay_time) | date: 'medium'}}
+        </div>
+      </nb-list-item>
+
+
+    </nb-list>
+
+
+  </nb-card-body>
+</nb-card>

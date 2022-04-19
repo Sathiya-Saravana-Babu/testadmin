@@ -1,0 +1,182 @@
+<nb-card  accent="info">
+  <!-- <nb-card-header>
+
+  <nb-alert accent="primary">Primary. You have been successfully authenticated!</nb-alert>
+
+  </nb-card-header> -->
+  <nb-card-body [nbSpinner]="loading" nbSpinnerStatus="danger" >
+
+    <nb-list  *ngIf="dialogAction=='view'" class="dialog-list">
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Page</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogData.page_name}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row">
+        <div class="title col-4">
+          <h6>Section name</h6>
+        </div>
+        <div class="content col-8">
+          {{pageNameTranslator(dialogData.section_name)}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.section_title && dialogData.section_title">
+        <div class="title col-4">
+          <h6>Section title</h6>
+        </div>
+        <div class="content col-8" >
+          {{dialogData.section_title}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1' && dialogData.section_title_fr">
+        <div class="title col-4">
+          <h6>Section title - FR</h6>
+        </div>
+        <div class="content col-8">
+          {{dialogData.section_title_fr}}
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1' && dialogData.section_content">
+        <div class="title col-4">
+          <h6>Section content</h6>
+        </div>
+        <div class="content col-8" [innerHTML]="dialogData.section_content">
+
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1' && dialogData.section_content_fr">
+        <div class="title col-4">
+          <h6>Section content - FR</h6>
+        </div>
+        <div class="content col-8" [innerHTML]="dialogData.section_content_fr">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload=='1'">
+        <div class="title col-4">
+          <h6>Section Image</h6>
+        </div>
+        <div class="content col-8 section_image">
+          <img [src]="base_url+'uploads/sliders/'+dialogData.section_image" alt="EasyTravel" *ngIf="dialogData.section_name=='slider'">
+          <img [src]="base_url+'uploads/banners/'+dialogData.section_image" alt="EasyTravel" *ngIf="dialogData.section_name=='banner'">
+        </div>
+      </nb-list-item>
+
+    </nb-list>
+
+
+    <nb-list class="dialog-list content" *ngIf="dialogAction=='edit' || dialogAction=='add'">
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1'">
+        <div class="title col-4">
+          <h6>Page</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" id="section_content" disabled [(ngModel)]="dialogData.page_name" nbInput fullWidth status="basic" placeholder="Title">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1'">
+        <div class="title col-4">
+          <h6>Section Name</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" disabled [(ngModel)]="dialogData.section_name" nbInput fullWidth status="basic" placeholder="Title">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1'">
+        <div class="title col-4">
+          <h6>Section title</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text"  [disabled]="dialogData.section_name=='social_link'" [(ngModel)]="dialogData.section_title" nbInput fullWidth status="basic" placeholder="Title">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.need_image_upload_only!='1' && dialogData.section_name!='social_link'">
+        <div class="title col-4">
+          <h6>Section title - FR</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text"  [(ngModel)]="dialogData.section_title_fr" nbInput fullWidth status="basic" placeholder="Title">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row"  *ngIf="dialogData.need_image_upload_only!='1'">
+        <div class="title col-4">
+          <h6>Section content</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" [(ngModel)]="dialogData.section_content" nbInput fullWidth status="basic" placeholder="Content">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row"  *ngIf="dialogData.need_image_upload_only!='1' && dialogData.section_name!='social_link'">
+        <div class="title col-4">
+          <h6>Section content - FR</h6>
+        </div>
+        <div class="content col-8">
+          <input type="text" id="section_content_fr" [(ngModel)]="dialogData.section_content_fr" nbInput fullWidth status="basic" placeholder="Content - FR">
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row"  *ngIf="dialogData.section_name=='slider'">
+        <div class="title col-4">
+          <h6>Choose page</h6>
+        </div>
+        <div class="content col-8">
+          <nb-select placeholder="Select page" [(ngModel)]="dialogData.page_name">
+            <nb-option value="home">Home page</nb-option>
+            <nb-option value="trains">Trains Page</nb-option>
+            <nb-option value="buses">Buses Page</nb-option>
+            <nb-option value="flights">Flights Page</nb-option>
+            <nb-option value="parcels">Parcels page</nb-option>
+          </nb-select>
+        </div>
+      </nb-list-item>
+
+      <nb-list-item class="row" *ngIf="dialogData.section_name=='banner' || dialogData.section_name=='slider'">
+        <div class="title col-4">
+          <h6>Section Image</h6>
+        </div>
+        <div class="content col-8">
+          <!-- <input type="file" id="section_image" [(ngModel)]="dialogData.section_image" nbInput fullWidth status="basic" placeholder="Content - FR"> -->
+
+          <input type="file" name="profile_image" id="imageUpload" accept="image/*" (change)="onFileChange($event)" />
+
+          <div class="pt-3 section_image" *ngIf="dialogData.section_image">
+            <img [src]="base_url+'uploads/sliders/'+dialogData.section_image" alt="EasyTravel" *ngIf="dialogData.section_name=='slider'">
+            <img [src]="base_url+'uploads/banners/'+dialogData.section_image" alt="EasyTravel" *ngIf="dialogData.section_name=='banner'">
+          </div>
+
+          <div class="pt-3">
+            <span *ngIf="dialogData.section_name=='slider'" style="font-style:italic">The image dimension should be, (390px, 260px)</span>
+            <span *ngIf="dialogData.section_name=='banner'" style="font-style:italic">The image dimension should be, (2000, 516px)</span>
+          </div>
+        </div>
+      </nb-list-item>
+
+    </nb-list>
+
+  </nb-card-body>
+
+  <nb-card-footer *ngIf="dialogAction!='view'">
+    <div class="mt-3">
+      <button (click)="closeWindow()" class="btn btn-danger" status="danger" [disabled]="loading">Cancel</button>
+
+      <button class="btn btn-dark ml-3" *ngIf="(dialogData.section_name=='faq_item' || dialogData.section_name=='slider') && dialogAction!='add'" (click)="deleteItem()">Delete</button>
+
+      <button class="btn btn-primary ml-3" (click)="submitFormResults()" status="primary" [disabled]="loading">{{dialogAction=='edit'?'Update': 'Add'}}</button>
+    </div>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,44 @@
+.title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #696969;
+}
+
+.value {
+    font-size: 15px;
+    color: #363d44;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.accept {
+    background-color: #28da2e;
+    border: 1px solid #1bc420;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.deny {
+    background-color: #EA1E63;
+    border: 1px solid #EA1E63;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.process {
+    background-color: #FEC007;
+    border: 1px solid #FFBF10;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+nb-icon {
+    cursor: pointer;
+    color: white;
+}

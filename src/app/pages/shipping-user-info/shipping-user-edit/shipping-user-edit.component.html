@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-body>
+        <div class="col">
+            <div class="row mb-4">
+                <span class="col-5">Dimension Price / 1cubic metre (FCfa)</span>
+                <input class="w-100" type="number" nbInput [(ngModel)]="dialogData.shipping_dimension_price">
+            </div>
+            <div class="row mb-4">
+                <span class="col-5">Weight Price / kg (FCfa)</span>
+                <input class="w-100" type="number" nbInput [(ngModel)]="dialogData.shipping_weight_price">
+            </div>
+            <div class="row mb-4">
+                <span class="col-5">Global Shipping Rate (FCfa)</span>
+                <input class="w-100" type="number" nbInput [(ngModel)]="dialogData.shipping_global_shipping_rate">
+            </div>
+            <div class="row mb-4" *ngFor="let item of dialogData.packages">
+                <span class="col-5">{{item.package_name}} (FCfa)</span>
+                <input class="w-100" type="number" nbInput [(ngModel)]="item.package_price">
+            </div>
+        </div>
+        <!-- <div class="col" *ngFor="let package of packageInfo">
+            <div class="row mb-4">
+                <span class="col-5">{{package.package_name}}</span>
+                <input class="w-100" type="number" nbInput [(ngModel)]="package.package_price">
+            </div>
+        </div> -->
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="btn btn-primary float-right ml-3" (click)="updataPrice()">Update</button>
+        <button class="btn btn-secondary float-right" (click)="closeWindow()">Cancel</button>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,130 @@
+<nb-card>
+    <nb-card-header *ngFor="let item of userInfo">
+        Shipping Company - {{item.shipping_username}}
+        <div class="float-right ml-3">
+            <button class="btn btn-primary mr-4" (click)="editPrice()">Edit Price</button>
+            <button class="btn btn-dark" [routerLink]="['/pages/shipping-users']" routerLinkActive="router-link-active">Back</button>
+        </div>
+        <div class="process float-right" *ngIf="showProcess" (click)="showPrice()" [nbPopover]="templateRef">
+            <ng-template #templateRef>
+                <div class="col">
+                    <div class="row mb-3 mt-3">
+                        <span class="col-8">Dimension Price / 1cubic metre (FCfa)</span>
+                        <span>{{priceValue.shipping_dimension_price}}</span>
+                    </div>
+                    <div class="row mb-3">
+                        <span class="col-8">Weight Price / kg (FCfa)</span>
+                        <span>{{priceValue.shipping_weight_price}}</span>
+                    </div>
+                    <div class="row mb-3">
+                        <span class="col-8">Global Shipping Rate (FCfa)</span>
+                        <span>{{priceValue.shipping_global_shipping_rate}}</span>
+                    </div>
+                    <div class="row mb-3" *ngFor="let item of priceValue.packages">
+                        <span class="col-8">{{item.package_name}} (FCfa)</span>
+                        <span>{{item.package_price}}</span>
+                    </div>
+                </div>
+            </ng-template>
+            <span class="mr-3">Your suggestion is under processing...</span>
+            <nb-icon icon="close-outline" (click)="closeProcess()"></nb-icon>
+        </div>
+        <div class="accept float-right" *ngIf="showAlert==='accept'">
+            <span class="mr-3">Your price suggestion accepted</span>
+            <nb-icon icon="close-outline" (click)="closeAlert()"></nb-icon>
+        </div>
+        <div class="deny float-right" *ngIf="showAlert==='deny'">
+            <span class="mr-3">Your price suggestion denied</span>
+            <nb-icon icon="close-outline" (click)="closeAlert()"></nb-icon>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-card *ngIf="userInfo">
+            <nb-card-header>
+                User Info
+            </nb-card-header>
+            <nb-card-body *ngFor="let user of userInfo">
+                <div class="col">
+                    <div class="row mb-5 borders">
+                        <span class="col-5 title">Email</span>
+                        <span class="value">{{user.shipping_email}}</span>
+                    </div>
+                    <div class="row mb-5">
+                        <span class="col-5 title">Phone</span>
+                        <span class="value">{{user.shipping_phone}}</span>
+                    </div>
+                    <div class="row mb-5">
+                        <span class="col-5 title">Dimension Price / 1cubic metre  (FCfa)</span>
+                        <span class="value">{{user.shipping_dimension_price}}</span>
+                    </div>
+                    <div class="row mb-5">
+                        <span class="col-5 title">Weight Price / kg (FCfa)</span>
+                        <span class="value">{{user.shipping_weight_price}}</span>
+                    </div>
+                    <div class="row mb-5">
+                        <span class="col-5 title">Global Shipping Rate (FCfa)</span>
+                        <span class="value">{{user.shipping_global_shipping_rate}}</span>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card *ngIf="packageInfo">
+            <nb-card-header>
+                Shipping Package Info
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="column col-2">
+                        <span class="title mb-5">Package Name</span>
+                        <span class="value mb-5" *ngFor="let package of packageInfo">{{package.package_name}}</span>
+                    </div>
+                    <div class="column col-2">
+                        <span class="title mb-5">Package Height (cm)</span>
+                        <span class="value mb-5 text-center" *ngFor="let package of packageInfo">{{package.package_height}}</span>
+                    </div>
+                    <div class="column col-2">
+                        <span class="title mb-5">Package Length (cm)</span>
+                        <span class="value mb-5 text-center" *ngFor="let package of packageInfo">{{package.package_length}}</span>
+                    </div>
+                    <div class="column col-2">
+                        <span class="title mb-5">Package Width (cm)</span>
+                        <span class="value mb-5 text-center" *ngFor="let package of packageInfo">{{package.package_width}}</span>
+                    </div>
+                    <div class="column col-2">
+                        <span class="title mb-5">Package Weight (kg)</span>
+                        <span class="value mb-5 text-center" *ngFor="let package of packageInfo">{{package.package_weight}}</span>
+                    </div>
+                    <div class="column col-2">
+                        <span class="title mb-5">Package Price (FCfa)</span>
+                        <span class="value mb-5 text-center" *ngFor="let package of packageInfo">{{package.package_price}}</span>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card *ngIf="zoneInfo">
+            <nb-card-header>
+                Shipping Zone Info
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="column col-3">
+                        <span class="title mb-5">From Area</span>
+                        <span class="value mb-5" *ngFor="let zone of zoneInfo">{{zone.area1_place}}</span>
+                    </div>
+                    <div class="column col-3">
+                        <span class="title mb-5">To Area</span>
+                        <span class="value mb-5" *ngFor="let zone of zoneInfo">{{zone.area2_place}}</span>
+                    </div>
+                    <div class="column col-3">
+                        <span class="title mb-5">Shipping Method</span>
+                        <span class="value mb-5" *ngFor="let zone of zoneInfo">{{zone.zone_shipping_method}}</span>
+                    </div>
+                    <div class="column col-3">
+                        <span class="title mb-5">Zone Price (FCfa)</span>
+                        <span class="value mb-5 text-center" *ngFor="let zone of zoneInfo">{{zone.zone_price}}</span>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-body>
+</nb-card>

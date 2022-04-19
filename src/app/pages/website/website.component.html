@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>
+    Manage Contents - {{pageName}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table (userRowSelect)="selectRow($event)" (edit)="editRow($event)" (delete)="deleteRow($event)" [settings]="tableSettings" [source]="tableSource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

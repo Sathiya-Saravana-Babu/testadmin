@@ -1,0 +1,14 @@
+<nb-card [nbSpinner]="loading" [nbSpinnerMessage]="'Fetching routes'">
+  <nb-card-header >
+    <div class="float-left" [innerHTML]="companyName"></div>
+    <div class="float-right">
+      <button class="btn btn-dark" [routerLink]="['/pages/companies']" routerLinkActive="router-link-active" >Back</button>
+    </div>
+    <div class="clear"></div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table (userRowSelect)="selectRow($event)" (create)="createRow()" (edit)="editRow($event)" (delete)="deleteRow($event)" [settings]="tableSettings" [source]="tableSource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

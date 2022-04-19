@@ -1,0 +1,30 @@
+<nb-card>
+  <nb-card-header>
+    Manage Bookings
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table (userRowSelect)="selectRow($event)" (create)="createRow()" (edit)="editRow($event)" (delete)="deleteRow($event)" [settings]="tableSettings" [source]="tableSource">
+    </ng2-smart-table>
+  </nb-card-body>
+
+
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-4">
+    <nb-alert [nbSpinner]="loading" status="primary" accent="info">Total Tickets: {{currencyConverter(tableAmount.amount)}} Fcfa
+    </nb-alert>
+  </div>
+  <div class="col-4">
+  <nb-alert [nbSpinner]="loading" status="warning" accent="info">Total Commission: {{currencyConverter(tableAmount.commission)}} Fcfa</nb-alert>
+  </div>
+      <div class="col-4">
+  <nb-alert  [nbSpinner]="loading" status="success" accent="info">Total Sales: {{currencyConverter((+tableAmount.amount)+(+tableAmount.commission))}} Fcfa</nb-alert>
+
+      </div>
+    </div>
+  </nb-card-footer>
+
+
+
+</nb-card>
